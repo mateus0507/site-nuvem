@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Moderação | PANA Projetos</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <main>
+        <section>
+            <div class="container">
+                <h1>Moderação do mural</h1>
+
+                <form id="login">
+                    <label>Senha de moderação
+                        <input id="token" type="password" autocomplete="current-password" required>
+                    </label>
+                    <button class="btn" type="submit">Entrar</button>
+                </form>
+
+                <div id="painel" hidden>
+                    <div class="abas">
+                        <button type="button" data-status="pendente" class="ativa">Pendentes</button>
+                        <button type="button" data-status="aprovada">Aprovadas</button>
+                        <button type="button" data-status="rejeitada">Rejeitadas</button>
+                        <button type="button" id="sair">Sair</button>
+                    </div>
+
+                    <p id="aviso" role="status"></p>
+                    <ul id="lista"></ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="admin.js"></script>
+</body>
+</html>

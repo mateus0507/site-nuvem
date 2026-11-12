@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sugestões | PANA Projetos</title>
+
+    <!-- Fontes do site -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Arquivos CSS -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="pg-sugestao.css">
+</head>
+
+<body>
+    <!-- Cabeçalho e menu -->
+    <header class="topo">
+        <div class="container">
+            <a href="../pg-inicial/pg-inicial.html">
+                <img src="../assets/img/logo.png" alt="PANA Projetos">
+            </a>
+
+            <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+                Menu
+            </button>
+
+            <nav>
+                <ul id="menu">
+                    <li><a href="../pg-inicial/pg-inicial.html">Início</a></li>
+                    <li><a href="../pg-historia/pg-historia.html">História</a></li>
+                    <li><a href="../pg-plano/pg-plano.html">Projeto</a></li>
+                    <li><a href="../pg-sugestao/pg-sugestao.html" aria-current="page">Sugestões</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <section>
+            <div class="container mural">
+
+                <!-- Título -->
+                <div class="mural-topo">
+                    <h1>Mural da vizinhança</h1>
+                    <p class="intro">
+                        Conte o que você gostaria de ver na praça e converse com quem mora por perto.
+                    </p>
+                </div>
+
+                <!-- Formulário de sugestões -->
+                <form id="form-chat" class="cartao-form">
+                    <h2>Deixe sua mensagem</h2>
+
+                    <div class="linha-campos">
+                        <label>
+                            Seu nome
+                            <input id="nome" required maxlength="40" autocomplete="given-name">
+                        </label>
+
+                        <label>
+                            Assunto
+                            <select id="assunto">
+                                <option>Sugestão</option>
+                                <option>Dúvida</option>
+                                <option>Elogio</option>
+                                <option>Problema na praça</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <label>
+                        Mensagem
+                        <textarea id="texto" required maxlength="400" rows="4" placeholder="Escreva aqui sua ideia, dúvida ou recado..."></textarea>
+                        <span id="contador-texto" class="contador-texto">0 / 400</span>
+                    </label>
+
+                    <div class="rodape-form">
+                        <p id="status-envio" role="status"></p>
+                        <button class="btn" type="submit">Enviar mensagem</button>
+                    </div>
+                </form>
+
+                <!-- Carrossel de comentários -->
+                <div class="comentarios">
+                    <h2>💬 O que a vizinhança está dizendo</h2>
+
+                    <ul id="mensagens" aria-live="off"></ul>
+
+                    <div class="controle-comentarios">
+                        <button type="button" id="comentario-anterior" aria-label="Comentário anterior">&#8249;</button>
+
+                        <span id="contador-comentarios">0 / 0</span>
+
+                        <button type="button" id="comentario-proximo" aria-label="Próximo comentário">&#8250;</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>
+                <strong>PANA Projetos</strong><br>
+                Revitalização da Praça Américo Ferreira de Abreu
+            </p>
+
+            <p>
+                contato@seudominio.com.br<br>
+                @seuperfil
+            </p>
+        </div>
+    </footer>
+
+    <!-- Arquivo JavaScript -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

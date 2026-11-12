@@ -1,0 +1,80 @@
+.intro {
+    font-size: 1.25rem;
+    margin: 1rem 0 2.5rem;
+}
+
+/* Linha do tempo */
+.linha {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    display: grid;
+    gap: 3rem;
+}
+
+/* Linha colorida central */
+.linha::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(var(--laranja), var(--rosa), var(--azul), var(--verde));
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
+
+/* Organização dos marcos */
+.linha li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Alterna a posição das fotos */
+.linha li:nth-child(even) .foto {
+    order: 2;
+}
+
+/* Estilo do depoimento */
+.relato {
+    margin: 3.5rem auto 0;
+    max-width: 640px;
+    border-left: 8px solid var(--amarelo);
+    padding: .5rem 1.5rem;
+    font-family: var(--fonte-titulo);
+    font-size: 1.4rem;
+}
+
+/* Identificação do morador */
+.relato cite {
+    display: block;
+    font-family: var(--fonte-texto);
+    font-size: 1rem;
+    color: var(--suave);
+    margin-top: .5rem;
+    font-style: normal;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 760px) {
+
+    /* Linha posicionada à esquerda */
+    .linha::before {
+        left: 8px;
+    }
+
+    /* Marcos em uma coluna */
+    .linha li {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding-left: 2rem;
+    }
+
+    /* Ordem das fotos no celular */
+    .linha li:nth-child(even) .foto {
+        order: 0;
+    }
+}

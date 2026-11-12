@@ -1,0 +1,13 @@
+form#login { display: grid; gap: .8rem; max-width: 360px; margin: 1.5rem 0; }
+form#login label { display: grid; gap: .25rem; font-weight: 700; }
+input { font: inherit; padding: .6rem .8rem; border: 2px solid #b9c4cf; border-radius: 8px; }
+.abas { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.5rem 0 1rem; }
+.abas button { font: inherit; font-weight: 700; padding: .5rem 1rem; border-radius: 999px; border: 2px solid var(--texto); background: #fff; cursor: pointer; }
+.abas button.ativa { background: var(--rosa); border-color: var(--rosa); color: #fff; }
+#lista { list-style: none; padding: 0; display: grid; gap: 1rem; }
+#lista li { background: #fff; border-left: 6px solid var(--ciano); border-radius: 4px 18px 18px 4px; padding: 1rem 1.2rem; box-shadow: 0 2px 0 rgba(29,39,51,.12); }
+#lista small { color: var(--suave); display: block; margin-bottom: .4rem; }
+#lista p { margin-bottom: .8rem; overflow-wrap: anywhere; }
+.acoes { display: flex; flex-wrap: wrap; gap: .5rem; }
+.acoes button { font: inherit; font-weight: 700; padding: .4rem 1rem; border-radius: 999px; border: 0; cursor: pointer; }
+.aprovar { background: #8be0ae; } .rejeitar { background: var(--amarelo); } .apagar { background: #f3b4b4; }

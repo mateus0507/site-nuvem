@@ -1,0 +1,276 @@
+:root {
+    --laranja: #f7861b;
+    --rosa: #e0176e;
+    --azul: #1f7be0;
+    --ciano: #5bcde8;
+    --rosa-claro: #f9b4da;
+    --verde: #1e8a4c;
+    --amarelo: #ffc21a;
+    --fundo: #fbfaf7;
+    --texto: #1d2733;
+    --suave: #5d6b7a;
+    --fonte-titulo: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+    --fonte-texto: "Nunito Sans", "Segoe UI", sans-serif;
+}
+
+/* Configurações gerais */
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: var(--fonte-texto);
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.65;
+    font-size: 1.05rem;
+}
+
+/* Imagens */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Títulos */
+h1, h2, h3 {
+    font-family: var(--fonte-titulo);
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    margin-bottom: .6rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+/* Textos e links */
+p {
+    max-width: 65ch;
+}
+
+a {
+    color: var(--azul);
+}
+
+/* Destaque ao navegar pelo teclado */
+:focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 3px;
+}
+
+/* Largura principal do conteúdo */
+.container {
+    width: min(1120px, 92%);
+    margin-inline: auto;
+}
+
+/* Espaçamento das seções */
+section {
+    padding: 3.5rem 0;
+}
+
+/* Cabeçalho fixo */
+header.topo {
+    background: #fff;
+    border-bottom: 4px solid var(--rosa);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Alinhamento do cabeçalho */
+.topo .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .5rem 0;
+}
+
+/* Logo */
+.topo img {
+    height: 64px;
+    width: auto;
+}
+
+/* Menu de navegação */
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: .4rem;
+}
+
+nav a {
+    display: block;
+    padding: .5rem 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: 700;
+}
+
+/* Efeito ao passar o mouse */
+nav a:hover {
+    background: var(--rosa-claro);
+}
+
+/* Página atual do menu */
+nav a[aria-current=page] {
+    background: var(--rosa);
+    color: #fff;
+}
+
+/* Botão do menu mobile */
+.menu-btn {
+    display: none;
+    background: none;
+    border: 2px solid var(--texto);
+    border-radius: 8px;
+    padding: .4rem .8rem;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Grade de conteúdo */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Fotos dos conteúdos */
+.foto {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+    border-radius: 6px 28px 6px 28px;
+}
+
+/* Cartões */
+.card {
+    background: #fff;
+    border-radius: 6px 24px 6px 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 0 rgba(29,39,51,.12);
+    border-top: 6px solid var(--laranja);
+}
+
+/* Cores alternadas dos cartões */
+.card:nth-child(3n+2) {
+    border-top-color: var(--azul);
+}
+
+.card:nth-child(3n) {
+    border-top-color: var(--verde);
+}
+
+/* Foto dentro do cartão */
+.card .foto {
+    border-radius: 0;
+}
+
+/* Conteúdo do cartão */
+.card-corpo {
+    padding: 1.1rem 1.3rem 1.4rem;
+}
+
+/* Etiqueta de data */
+.data {
+    display: inline-block;
+    background: var(--amarelo);
+    font-weight: 800;
+    padding: .1rem .7rem;
+    border-radius: 999px;
+    font-size: .9rem;
+    margin-bottom: .5rem;
+}
+
+/* Botões principais */
+.btn {
+    display: inline-block;
+    background: var(--rosa);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    padding: .8rem 1.6rem;
+    border-radius: 999px;
+    border: 0;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* Efeito do botão */
+.btn:hover {
+    background: #b80f58;
+}
+
+/* Faixa de destaque */
+.faixa {
+    background: var(--azul);
+    color: #fff;
+}
+
+.faixa a {
+    color: #fff;
+}
+
+/* Rodapé */
+footer {
+    background: var(--texto);
+    color: #dfe6ee;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+/* Organização do rodapé */
+footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 760px) {
+    .menu-btn {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: #fff;
+        flex-direction: column;
+        padding: .8rem 4%;
+        border-bottom: 4px solid var(--rosa);
+    }
+
+    /* Exibe o menu quando aberto */
+    nav ul.aberto {
+        display: flex;
+    }
+}
+
+/* Respeita a preferência por menos animações */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
