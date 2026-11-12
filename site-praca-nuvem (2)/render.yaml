@@ -1,0 +1,29 @@
+# Publicação com 1 clique no Render (sem Docker): cria o site e o banco PostgreSQL já ligados.
+# Como usar: suba o projeto no GitHub -> Render > New > Blueprint -> escolha o repositório -> Apply.
+databases:
+  - name: pana-db
+    databaseName: pana_db
+    user: pana
+    plan: basic-256mb
+
+services:
+  - type: web
+    name: pana-projetos
+    runtime: node
+    plan: starter
+    buildCommand: npm ci --prefix backend
+    startCommand: node backend/src/server.js
+    healthCheckPath: /api/status
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pana-db
+          property: connectionString
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: PUBLICAR_DIRETO
+        value: "true"

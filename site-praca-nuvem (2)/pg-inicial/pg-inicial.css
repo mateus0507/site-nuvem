@@ -1,0 +1,72 @@
+.hero {
+    padding-top: 2.5rem; /* Espaço no topo */
+    overflow: hidden; /* Esconde o excesso */
+}
+
+/* Organização do destaque */
+.hero-grade {
+    display: grid; /* Usa grade */
+    grid-template-columns: 1.1fr 1fr; /* Duas colunas */
+    gap: 2rem; /* Espaço entre colunas */
+    align-items: center; /* Alinha ao centro */
+}
+
+/* Espaçamento do texto */
+.hero p {
+    margin: 1rem 0; /* Margem vertical */
+}
+
+/* Área da colagem */
+.colagem {
+    position: relative; /* Referência das fotos */
+    min-height: 380px; /* Altura mínima */
+}
+
+/* Fundo colorido da colagem */
+.colagem::before {
+    content: ""; /* Cria elemento vazio */
+    position: absolute; /* Posiciona sobre a área */
+    inset: 8% 6% 0 12%; /* Define os limites */
+    background: linear-gradient(100deg, var(--laranja) 33%, var(--rosa) 33% 66%, var(--azul) 66%); /* Faixas coloridas */
+    transform: skewX(-6deg); /* Inclina o fundo */
+    border-radius: 8px; /* Arredonda os cantos */
+    opacity: .9; /* Ajusta a transparência */
+}
+
+/* Posicionamento e sombra das fotos */
+.colagem .foto {
+    position: absolute; /* Permite posicionar */
+    box-shadow: 0 6px 0 rgba(0,0,0,.15); /* Adiciona sombra */
+}
+
+/* Primeira foto */
+.f1 {
+    width: 62%; /* Largura da foto */
+    top: 0; /* Alinha ao topo */
+    left: 0; /* Alinha à esquerda */
+}
+
+/* Segunda foto */
+.f2 {
+    width: 52%; /* Largura da foto */
+    right: 0; /* Alinha à direita */
+    top: 30%; /* Distância do topo */
+}
+
+/* Terceira foto */
+.f3 {
+    width: 44%; /* Largura da foto */
+    left: 14%; /* Distância da esquerda */
+    bottom: 0; /* Alinha à base */
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 760px) {
+    .hero-grade {
+        grid-template-columns: 1fr; /* Uma coluna */
+    }
+
+    .colagem {
+        min-height: 320px; /* Reduz a altura */
+    }
+}

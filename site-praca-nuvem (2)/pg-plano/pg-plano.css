@@ -1,0 +1,74 @@
+.intro {
+    font-size: 1.25rem;
+    margin: 1rem 0 2rem;
+}
+
+/* Imagem do modelo 3D */
+.modelo {
+    aspect-ratio: 16/9;
+    margin-bottom: 1.5rem;
+}
+
+/* Figuras de antes e depois */
+.antes-depois figure {
+    margin: 0;
+}
+
+/* Legendas das imagens */
+.antes-depois figcaption {
+    font-weight: 800;
+    margin-top: .4rem;
+}
+
+/* Lista de etapas */
+.etapas {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Organização de cada etapa */
+.etapas li {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    background: rgba(255,255,255,.14);
+    padding: 1rem 1.3rem;
+    border-radius: 6px 20px 6px 20px;
+}
+
+/* Etiquetas de status */
+.tag {
+    flex: none;
+    width: 9.5rem;
+    text-align: center;
+    font-weight: 800;
+    padding: .3rem .6rem;
+    border-radius: 999px;
+    color: var(--texto);
+}
+
+/* Etapa concluída */
+.pronto {
+    background: #8be0ae;
+}
+
+/* Etapa em andamento */
+.andamento {
+    background: var(--amarelo);
+}
+
+/* Etapa prevista */
+.previsto {
+    background: var(--rosa-claro);
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 760px) {
+    .etapas li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

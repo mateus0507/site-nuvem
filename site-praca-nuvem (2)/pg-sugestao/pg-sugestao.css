@@ -1,0 +1,232 @@
+/* ===== Título da página ===== */
+.mural {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.mural-topo::after {
+    content: "";
+    display: block;
+    width: min(260px, 60%);
+    height: 10px;
+    margin-top: 1.4rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--laranja) 33%, var(--rosa) 33% 66%, var(--azul) 66%);
+}
+
+.intro {
+    font-size: 1.25rem;
+    margin-top: .8rem;
+}
+
+/* ===== Formulário ===== */
+.cartao-form {
+    display: grid;
+    gap: 1.1rem;
+    background: #fff;
+    border: 3px solid var(--texto);
+    border-radius: 6px 28px 6px 28px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    box-shadow: 8px 8px 0 var(--ciano);
+}
+
+.cartao-form h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.linha-campos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.cartao-form label {
+    display: grid;
+    gap: .35rem;
+    font-weight: 800;
+}
+
+.cartao-form input,
+.cartao-form select,
+.cartao-form textarea {
+    width: 100%;
+    font: inherit;
+    font-weight: 400;
+    padding: .7rem .9rem;
+    background: #fbfcfd;
+    border: 2px solid #b9c4cf;
+    border-radius: 10px;
+}
+
+.cartao-form input:focus,
+.cartao-form select:focus,
+.cartao-form textarea:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(31, 123, 224, .25);
+}
+
+.cartao-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contador-texto {
+    justify-self: end;
+    font-size: .9rem;
+    font-weight: 400;
+    color: var(--suave);
+}
+
+.rodape-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+#status-envio {
+    flex: 1 1 220px;
+    min-height: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+#status-envio.ok { color: var(--verde); }
+#status-envio.erro { color: #b3261e; }
+
+/* ===== Comentários ===== */
+.comentarios {
+    background: #16579f;
+    color: #fff;
+    border-radius: 28px 6px 28px 6px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.comentarios h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+#mensagens {
+    position: relative;
+    height: 220px;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.msg {
+    display: none;
+}
+
+.msg.ativa {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto 1fr;
+    column-gap: 1rem;
+    height: 100%;
+    padding: 1.2rem 1.4rem;
+    overflow: auto;
+    background: #fff;
+    color: var(--texto);
+    border-radius: 6px 22px 6px 22px;
+    animation: surgir .5s ease;
+}
+
+.msg .avatar {
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    font-family: var(--fonte-titulo);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.cor-0 { background: var(--laranja); color: var(--texto) !important; }
+.cor-1 { background: var(--rosa); }
+.cor-2 { background: var(--azul); }
+.cor-3 { background: var(--verde); }
+.cor-4 { background: var(--amarelo); color: var(--texto) !important; }
+
+.msg strong {
+    align-self: end;
+    font-family: var(--fonte-titulo);
+    font-size: 1.15rem;
+}
+
+.msg em {
+    font-style: normal;
+    font-size: .9rem;
+    color: var(--suave);
+}
+
+.msg .texto {
+    grid-column: 1 / -1;
+    margin-top: .8rem;
+    font-size: 1.1rem;
+    overflow-wrap: anywhere;
+}
+
+/* Mensagem de "nenhum comentário" / erro */
+.msg.msg-vazio {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: 1rem;
+    text-align: center;
+    background: rgba(255, 255, 255, .12);
+    border: 2px dashed rgba(255, 255, 255, .6);
+    border-radius: 6px 22px 6px 22px;
+}
+
+.controle-comentarios {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+.controle-comentarios button {
+    width: 46px;
+    height: 46px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--amarelo);
+    color: var(--texto);
+    font-size: 1.7rem;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.controle-comentarios button:hover {
+    background: #ffd24d;
+}
+
+#contador-comentarios {
+    min-width: 4.5rem;
+    text-align: center;
+    font-weight: 800;
+}
+
+@keyframes surgir {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .msg.ativa { animation: none; }
+}
+
+@media (max-width: 640px) {
+    .linha-campos { grid-template-columns: 1fr; }
+    #mensagens { height: 290px; }
+    .rodape-form .btn { width: 100%; }
+}
