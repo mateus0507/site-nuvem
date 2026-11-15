@@ -1,13 +1,3 @@
-
-// ==========================================
-// PANA PROJETOS
-// MURAL DA VIZINHANCA
-// ==========================================
-
-// 1. CONFIGURACAO DA API
-// Publicado: o site e a API ficam no mesmo endereço.
-// Só no seu computador: se o HTML for aberto por outro servidor (arquivo direto, Live Server...),
-// usa o backend em http://localhost:3000.
 const ambienteLocal =
     location.protocol === "file:" ||
     location.hostname === "localhost" ||

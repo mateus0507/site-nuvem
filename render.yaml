@@ -1,5 +1,3 @@
-# Publicação com 1 clique no Render (sem Docker): cria o site e o banco PostgreSQL já ligados.
-# Como usar: suba o projeto no GitHub -> Render > New > Blueprint -> escolha o repositório -> Apply.
 databases:
   - name: pana-db
     databaseName: pana_db

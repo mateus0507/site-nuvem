@@ -1,9 +1,3 @@
-
-// ==========================================
-// PANA PROJETOS
-// GALERIAS DA PAGINA DO PROJETO
-// ==========================================
-
 const visualizador = document.getElementById("visualizador");
 
 if (visualizador && typeof visualizador.showModal === "function") {
