@@ -3,21 +3,242 @@
     margin: 1rem 0 2rem;
 }
 
-/* Imagem do modelo 3D */
-.modelo {
-    aspect-ratio: 16/9;
-    margin-bottom: 1.5rem;
+.dica {
+    margin: 0 0 1.5rem;
+    color: var(--suave);
 }
 
-/* Figuras de antes e depois */
-.antes-depois figure {
+/* ===== Quadros: futuro e hoje ===== */
+.quadros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.quadro {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    padding: 1.3rem;
+    background: #fff;
+    border: 3px solid var(--texto);
+    border-radius: 6px 28px 6px 28px;
+    box-shadow: 8px 8px 0 var(--ciano);
+}
+
+.quadro:nth-child(2) {
+    box-shadow: 8px 8px 0 var(--rosa-claro);
+}
+
+.quadro h3 {
     margin: 0;
+    font-size: 1.5rem;
 }
 
-/* Legendas das imagens */
-.antes-depois figcaption {
+.nota {
+    margin: 0;
+    font-size: .9rem;
+    color: var(--suave);
+}
+
+.abrir {
+    justify-self: start;
+}
+
+/* Fotos minimizadas dentro do quadro (mostra até 4; as outras abrem na galeria) */
+.mosaico {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 6px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 6px 20px 6px 20px;
+}
+
+.mosaico a {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.mosaico a:nth-child(n+5) {
+    display: none;
+}
+
+.mosaico img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .3s;
+}
+
+.mosaico a:hover img {
+    transform: scale(1.06);
+}
+
+/* Quando há poucas fotos, elas ocupam o espaço todo */
+.mosaico a:only-child {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+}
+
+.mosaico a:first-child:nth-last-child(2),
+.mosaico a:last-child:nth-child(2),
+.mosaico a:first-child:nth-last-child(3) {
+    grid-column: 1 / -1;
+}
+
+/* "+4" no último quadradinho quando existem mais fotos */
+.mosaico a[data-extra]::after {
+    content: attr(data-extra);
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(22, 87, 159, .75);
+    color: #fff;
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
     font-weight: 800;
-    margin-top: .4rem;
+}
+
+/* ===== Visualizador de fotos (tela grande) ===== */
+body:has(.visualizador[open]) {
+    overflow: hidden;
+}
+
+.visualizador {
+    width: min(1100px, 96vw);
+    max-height: 96vh;
+    margin: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 6px 28px 6px 28px;
+    background: #10161d;
+    color: #fff;
+    overflow: hidden;
+}
+
+.visualizador::backdrop {
+    background: rgba(10, 15, 20, .85);
+}
+
+.visualizador :focus-visible {
+    outline-color: var(--amarelo);
+}
+
+.vis-corpo {
+    display: grid;
+    gap: .6rem;
+    padding: 1rem 1.2rem 1.2rem;
+}
+
+.vis-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.vis-topo h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.vis-fechar {
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--amarelo);
+    color: var(--texto);
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.vis-palco {
+    position: relative;
+    display: grid;
+    place-items: center;
+    background: #000;
+    border-radius: 4px 18px 4px 18px;
+    overflow: hidden;
+}
+
+.vis-img {
+    max-width: 100%;
+    max-height: 62vh;
+    object-fit: contain;
+}
+
+.vis-seta {
+    position: absolute;
+    top: 50%;
+    width: 46px;
+    height: 46px;
+    margin-top: -23px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--amarelo);
+    color: var(--texto);
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.vis-anterior { left: 12px; }
+.vis-proxima { right: 12px; }
+
+.vis-legenda {
+    margin: 0;
+    min-height: 1.6em;
+    max-width: none;
+    text-align: center;
+}
+
+.vis-contador {
+    margin: 0;
+    max-width: none;
+    text-align: center;
+    font-size: .9rem;
+    font-weight: 800;
+    color: var(--ciano);
+}
+
+.vis-tiras {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: .3rem 0;
+}
+
+.vis-tiras button {
+    flex: none;
+    width: 76px;
+    height: 56px;
+    padding: 0;
+    border: 3px solid transparent;
+    border-radius: 6px;
+    background: none;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: .6;
+}
+
+.vis-tiras button[aria-current="true"] {
+    border-color: var(--amarelo);
+    opacity: 1;
+}
+
+.vis-tiras img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Lista de etapas */
@@ -70,5 +291,15 @@
     .etapas li {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .vis-img {
+        max-height: 50vh;
+    }
+
+    .vis-seta {
+        width: 40px;
+        height: 40px;
+        margin-top: -20px;
     }
 }

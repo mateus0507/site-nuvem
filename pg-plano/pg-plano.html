@@ -1,117 +1,133 @@
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <!-- Configurações da página -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto | PANA Projetos</title>
+// ==========================================
+// PANA PROJETOS
+// GALERIAS DA PAGINA DO PROJETO
+// ==========================================
 
-    <!-- Conexão com o Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+const visualizador = document.getElementById("visualizador");
 
-    <!-- Fontes utilizadas no site -->
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+if (visualizador && typeof visualizador.showModal === "function") {
+    const titulo = visualizador.querySelector("#vis-titulo");
+    const imagem = visualizador.querySelector(".vis-img");
+    const legenda = visualizador.querySelector(".vis-legenda");
+    const contador = visualizador.querySelector(".vis-contador");
+    const tiras = visualizador.querySelector(".vis-tiras");
+    const palco = visualizador.querySelector(".vis-palco");
 
-    <!-- Arquivos CSS -->
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="pg-plano.css">
-</head>
+    let fotos = [];
+    let atual = 0;
 
-<body>
-<!-- Cabeçalho e menu -->
-<header class="topo"><div class="container">
-    <a href="../pg-inicial/pg-inicial.html"><img src="../assets/img/logo.png" alt="PANA Projetos"></a>
-    <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    // Mostra a foto de número "indice"
+    function mostrar(indice) {
+        atual = (indice + fotos.length) % fotos.length;
 
-    <!-- Links de navegação -->
-    <nav><ul id="menu">
-        <li><a href="../pg-inicial/pg-inicial.html">Início</a></li>
-        <li><a href="../pg-historia/pg-historia.html">História</a></li>
-        <li><a href="../pg-plano/pg-plano.html" aria-current="page">Projeto</a></li>
-        <li><a href="../pg-sugestao/pg-sugestao.html">Sugestões</a></li>
-    </ul></nav>
-</div></header>
+        const foto = fotos[atual];
 
-<!-- Conteúdo principal -->
-<main>
+        imagem.src = foto.href;
+        imagem.alt = foto.alt;
+        legenda.textContent = foto.legenda;
+        contador.textContent = `${atual + 1} / ${fotos.length}`;
 
-<!-- Apresentação do projeto -->
-<section><div class="container">
-    <h1>O projeto de revitalização</h1>
-    <p class="intro">Resumo do que será feito na praça e quem está envolvido.</p>
+        [...tiras.children].forEach((botao, n) => {
+            botao.setAttribute("aria-current", n === atual ? "true" : "false");
+        });
 
-    <!-- Modelo 3D da praça -->
-    <h2>Modelo 3D</h2>
-    <img class="foto modelo" src="../assets/img/planta.jpg" alt="Modelo 3D da praça revitalizada">
+        tiras.children[atual]?.scrollIntoView({ block: "nearest", inline: "center" });
+    }
 
-    <!-- Comparação de antes e depois -->
-    <div class="grid antes-depois">
-        <figure><img class="foto" src="../assets/img/placeholder.svg" alt="Praça hoje"><figcaption>Hoje</figcaption></figure>
-        <figure><img class="foto" src="../assets/img/placeholder.svg" alt="Proposta"><figcaption>Proposta</figcaption></figure>
-    </div>
-</div></section>
+    // Abre o visualizador com as fotos de um quadro
+    function abrir(quadro, indice) {
+        fotos = [...quadro.querySelectorAll(".mosaico a")].map((link) => {
+            const mini = link.querySelector("img");
 
-<!-- Etapas da revitalização -->
-<section class="faixa"><div class="container">
-    <h2>Etapas</h2>
+            return {
+                href: link.getAttribute("href"),
+                alt: mini.alt,
+                legenda: link.dataset.legenda || "",
+                mini: mini.getAttribute("src")
+            };
+        });
 
-    <!-- Lista de status -->
-    <ul class="etapas">
+        titulo.textContent = quadro.querySelector("h3").textContent;
 
-        <!-- Etapa concluída -->
-        <li><span class="tag pronto">Concluído</span><div>
-            <h3>Levantamento da praça</h3>
-            <p>Descrição curta da etapa.</p>
-        </div></li>
+        // Miniaturas embaixo
+        tiras.replaceChildren(...fotos.map((foto, n) => {
+            const botao = document.createElement("button");
+            const mini = document.createElement("img");
 
-        <!-- Etapa em andamento -->
-        <li><span class="tag andamento">Em andamento</span><div>
-            <h3>Projeto e modelo 3D</h3>
-            <p>Descrição curta da etapa.</p>
-        </div></li>
+            botao.type = "button";
+            botao.setAttribute("aria-label", `Ver foto ${n + 1}`);
+            mini.src = foto.mini;
+            mini.alt = "";
+            botao.appendChild(mini);
+            botao.addEventListener("click", () => mostrar(n));
 
-        <!-- Etapa prevista -->
-        <li><span class="tag previsto">Previsto</span><div>
-            <h3>Obras e plantio</h3>
-            <p>Descrição curta da etapa.</p>
-        </div></li>
+            return botao;
+        }));
 
-    </ul>
-</div></section>
+        // Com uma só foto, não precisa de setas
+        visualizador.querySelectorAll(".vis-seta").forEach((seta) => {
+            seta.hidden = fotos.length < 2;
+        });
+        tiras.hidden = fotos.length < 2;
 
-<!-- Participantes do projeto -->
-<section><div class="container">
-    <h2>Quem faz parte</h2>
+        visualizador.showModal();
+        mostrar(indice);
+    }
 
-    <!-- Cartões de participantes -->
-    <div class="grid">
-        <div class="card"><div class="card-corpo">
-            <h3>Nome da pessoa ou instituição</h3>
-            <p>Papel no projeto.</p>
-        </div></div>
+    // Prepara cada quadro
+    document.querySelectorAll("[data-galeria]").forEach((quadro) => {
+        const links = quadro.querySelectorAll(".mosaico a");
+        const botao = quadro.querySelector(".abrir");
 
-        <div class="card"><div class="card-corpo">
-            <h3>Nome da pessoa ou instituição</h3>
-            <p>Papel no projeto.</p>
-        </div></div>
+        if (botao) {
+            botao.textContent = links.length === 1 ? "Ver a foto" : `Ver as ${links.length} fotos`;
+            botao.addEventListener("click", () => abrir(quadro, 0));
+        }
 
-        <div class="card"><div class="card-corpo">
-            <h3>Nome da pessoa ou instituição</h3>
-            <p>Papel no projeto.</p>
-        </div></div>
-    </div>
-</div></section>
+        // "+N" no último quadradinho visível
+        if (links.length > 4) {
+            links[3].dataset.extra = `+${links.length - 4}`;
+        }
 
-</main>
+        links.forEach((link, i) => {
+            link.addEventListener("click", (evento) => {
+                evento.preventDefault();
+                abrir(quadro, i);
+            });
+        });
+    });
 
-<!-- Rodapé -->
-<footer><div class="container">
-    <p><strong>PANA Projetos</strong><br>Revitalização da Praça Américo Ferreira de Abreu</p>
-    <p>contato@seudominio.com.br<br>@seuperfil</p>
-</div></footer>
+    // Botões do visualizador
+    visualizador.querySelector(".vis-anterior").addEventListener("click", () => mostrar(atual - 1));
+    visualizador.querySelector(".vis-proxima").addEventListener("click", () => mostrar(atual + 1));
+    visualizador.querySelector(".vis-fechar").addEventListener("click", () => visualizador.close());
 
-<!-- Arquivo JavaScript -->
-<script src="../assets/js/script.js"></script>
-</body>
-</html>
+    // Setas do teclado (Esc já fecha sozinho)
+    visualizador.addEventListener("keydown", (evento) => {
+        if (fotos.length < 2) return;
+        if (evento.key === "ArrowRight") mostrar(atual + 1);
+        if (evento.key === "ArrowLeft") mostrar(atual - 1);
+    });
+
+    // Clique fora da janela fecha
+    visualizador.addEventListener("click", (evento) => {
+        if (evento.target === visualizador) visualizador.close();
+    });
+
+    // Arrastar o dedo no celular
+    let toqueX = null;
+
+    palco.addEventListener("touchstart", (evento) => {
+        toqueX = evento.changedTouches[0].clientX;
+    }, { passive: true });
+
+    palco.addEventListener("touchend", (evento) => {
+        if (toqueX === null || fotos.length < 2) return;
+
+        const diferenca = evento.changedTouches[0].clientX - toqueX;
+
+        if (Math.abs(diferenca) > 50) mostrar(atual + (diferenca < 0 ? 1 : -1));
+        toqueX = null;
+    });
+}
