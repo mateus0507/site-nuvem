@@ -1,133 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Configurações da página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto | PANA Projetos</title>
 
-// ==========================================
-// PANA PROJETOS
-// GALERIAS DA PAGINA DO PROJETO
-// ==========================================
+    <!-- Conexão com o Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-const visualizador = document.getElementById("visualizador");
+    <!-- Fontes utilizadas no site -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-if (visualizador && typeof visualizador.showModal === "function") {
-    const titulo = visualizador.querySelector("#vis-titulo");
-    const imagem = visualizador.querySelector(".vis-img");
-    const legenda = visualizador.querySelector(".vis-legenda");
-    const contador = visualizador.querySelector(".vis-contador");
-    const tiras = visualizador.querySelector(".vis-tiras");
-    const palco = visualizador.querySelector(".vis-palco");
+    <!-- Arquivos CSS -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="pg-plano.css">
+</head>
 
-    let fotos = [];
-    let atual = 0;
+<body>
+<!-- Cabeçalho e menu -->
+<header class="topo"><div class="container">
+    <a href="../pg-inicial/pg-inicial.html"><img src="../assets/img/logo.png" alt="PANA Projetos"></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
 
-    // Mostra a foto de número "indice"
-    function mostrar(indice) {
-        atual = (indice + fotos.length) % fotos.length;
+    <!-- Links de navegação -->
+    <nav><ul id="menu">
+        <li><a href="../pg-inicial/pg-inicial.html">Início</a></li>
+        <li><a href="../pg-historia/pg-historia.html">História</a></li>
+        <li><a href="../pg-plano/pg-plano.html" aria-current="page">Projeto</a></li>
+        <li><a href="../pg-sugestao/pg-sugestao.html">Sugestões</a></li>
+    </ul></nav>
+</div></header>
 
-        const foto = fotos[atual];
+<!-- Conteúdo principal -->
+<main>
 
-        imagem.src = foto.href;
-        imagem.alt = foto.alt;
-        legenda.textContent = foto.legenda;
-        contador.textContent = `${atual + 1} / ${fotos.length}`;
+<!-- Apresentação do projeto -->
+<section><div class="container">
+    <h1>O projeto de revitalização</h1>
+    <p class="intro">Resumo do que será feito na praça e quem está envolvido.</p>
 
-        [...tiras.children].forEach((botao, n) => {
-            botao.setAttribute("aria-current", n === atual ? "true" : "false");
-        });
+    <!-- Futuro e presente da praça: clique em um quadro para abrir as fotos -->
+    <h2>A praça no futuro e hoje</h2>
+    <p class="dica">Clique em um quadro para ver todas as fotos.</p>
 
-        tiras.children[atual]?.scrollIntoView({ block: "nearest", inline: "center" });
-    }
+    <div class="quadros">
 
-    // Abre o visualizador com as fotos de um quadro
-    function abrir(quadro, indice) {
-        fotos = [...quadro.querySelectorAll(".mosaico a")].map((link) => {
-            const mini = link.querySelector("img");
+        <!-- Quadro 1: como vai ficar (imagens do projeto) -->
+        <article class="quadro" data-galeria>
+            <h3>Como vai ficar</h3>
+            <div class="mosaico">
+                <a href="../assets/img/projeto/projeto-01.jpg" data-legenda="Vista aérea da proposta, com jardins, canal de água, pavilhão de madeira, playground e quadra."><img src="../assets/img/projeto/projeto-01-mini.jpg" alt="Vista aérea da proposta" loading="lazy"></a>
+                <a href="../assets/img/projeto/projeto-02.jpg" data-legenda="Pavilhões de madeira com vidros coloridos e o playground ao fundo."><img src="../assets/img/projeto/projeto-02-mini.jpg" alt="Pavilhões e jardins" loading="lazy"></a>
+                <a href="../assets/img/projeto/projeto-03.jpg" data-legenda="Quadra poliesportiva, academia ao ar livre e bancos ondulados."><img src="../assets/img/projeto/projeto-03-mini.jpg" alt="Quadra e academia ao ar livre" loading="lazy"></a>
+                <a href="../assets/img/projeto/projeto-04.jpg" data-legenda="Fonte em cascata com painéis de vidro colorido."><img src="../assets/img/projeto/projeto-04-mini.jpg" alt="Fonte com vidros coloridos" loading="lazy"></a>
+                <a href="../assets/img/projeto/projeto-05.jpg" data-legenda="Playground com piso colorido sob o pavilhão."><img src="../assets/img/projeto/projeto-05-mini.jpg" alt="Playground colorido" loading="lazy"></a>
+                <a href="../assets/img/projeto/projeto-06.jpg" data-legenda="Área coberta com vidros coloridos que projetam cores no piso."><img src="../assets/img/projeto/projeto-06-mini.jpg" alt="Área coberta" loading="lazy"></a>
+                <a href="../assets/img/projeto/projeto-07.jpg" data-legenda="Pavilhões, caminhos e canal de água entre os jardins."><img src="../assets/img/projeto/projeto-07-mini.jpg" alt="Caminhos e canal de água" loading="lazy"></a>
+                <a href="../assets/img/projeto/projeto-08.jpg" data-legenda="Área de convivência com mesas, bancos e quiosques de madeira."><img src="../assets/img/projeto/projeto-08-mini.jpg" alt="Área de convivência" loading="lazy"></a>
+            </div>
+            <button class="btn abrir" type="button">Ver as fotos</button>
+            <p class="nota">Imagens ilustrativas da proposta.</p>
+        </article>
 
-            return {
-                href: link.getAttribute("href"),
-                alt: mini.alt,
-                legenda: link.dataset.legenda || "",
-                mini: mini.getAttribute("src")
-            };
-        });
+        <!-- Quadro 2: como está hoje -->
+        <!-- Para trocar: substitua o endereço (href e src) pela foto atual e escreva a descrição em data-legenda e alt.
+             Para ter mais fotos, copie uma linha <a>...</a> e cole logo abaixo. O botão conta as fotos sozinho. -->
+        <article class="quadro" data-galeria>
+            <h3>Como está hoje</h3>
+            <div class="mosaico">
+                <a href="../assets/img/placeholder.svg" data-legenda="Descreva a foto de hoje"><img src="../assets/img/placeholder.svg" alt="Foto atual da praça" loading="lazy"></a>
+                <a href="../assets/img/placeholder.svg" data-legenda="Descreva a foto de hoje"><img src="../assets/img/placeholder.svg" alt="Foto atual da praça" loading="lazy"></a>
+                <a href="../assets/img/placeholder.svg" data-legenda="Descreva a foto de hoje"><img src="../assets/img/placeholder.svg" alt="Foto atual da praça" loading="lazy"></a>
+                <a href="../assets/img/placeholder.svg" data-legenda="Descreva a foto de hoje"><img src="../assets/img/placeholder.svg" alt="Foto atual da praça" loading="lazy"></a>
+            </div>
+            <button class="btn abrir" type="button">Ver as fotos</button>
+            <p class="nota">Fotos atuais da praça.</p>
+        </article>
 
-        titulo.textContent = quadro.querySelector("h3").textContent;
+    </div>
+</div></section>
 
-        // Miniaturas embaixo
-        tiras.replaceChildren(...fotos.map((foto, n) => {
-            const botao = document.createElement("button");
-            const mini = document.createElement("img");
+<!-- Etapas da revitalização -->
+<section class="faixa"><div class="container">
+    <h2>Etapas</h2>
 
-            botao.type = "button";
-            botao.setAttribute("aria-label", `Ver foto ${n + 1}`);
-            mini.src = foto.mini;
-            mini.alt = "";
-            botao.appendChild(mini);
-            botao.addEventListener("click", () => mostrar(n));
+    <!-- Lista de status -->
+    <ul class="etapas">
 
-            return botao;
-        }));
+        <!-- Etapa concluída -->
+        <li><span class="tag pronto">Concluído</span><div>
+            <h3>Levantamento da praça</h3>
+            <p>Descrição curta da etapa.</p>
+        </div></li>
 
-        // Com uma só foto, não precisa de setas
-        visualizador.querySelectorAll(".vis-seta").forEach((seta) => {
-            seta.hidden = fotos.length < 2;
-        });
-        tiras.hidden = fotos.length < 2;
+        <!-- Etapa em andamento -->
+        <li><span class="tag andamento">Em andamento</span><div>
+            <h3>Projeto e modelo 3D</h3>
+            <p>Descrição curta da etapa.</p>
+        </div></li>
 
-        visualizador.showModal();
-        mostrar(indice);
-    }
+        <!-- Etapa prevista -->
+        <li><span class="tag previsto">Previsto</span><div>
+            <h3>Obras e plantio</h3>
+            <p>Descrição curta da etapa.</p>
+        </div></li>
 
-    // Prepara cada quadro
-    document.querySelectorAll("[data-galeria]").forEach((quadro) => {
-        const links = quadro.querySelectorAll(".mosaico a");
-        const botao = quadro.querySelector(".abrir");
+    </ul>
+</div></section>
 
-        if (botao) {
-            botao.textContent = links.length === 1 ? "Ver a foto" : `Ver as ${links.length} fotos`;
-            botao.addEventListener("click", () => abrir(quadro, 0));
-        }
+<!-- Participantes do projeto -->
+<section><div class="container">
+    <h2>Quem faz parte</h2>
 
-        // "+N" no último quadradinho visível
-        if (links.length > 4) {
-            links[3].dataset.extra = `+${links.length - 4}`;
-        }
+    <!-- Cartões de participantes -->
+    <div class="grid">
+        <div class="card"><div class="card-corpo">
+            <h3>Nome da pessoa ou instituição</h3>
+            <p>Papel no projeto.</p>
+        </div></div>
 
-        links.forEach((link, i) => {
-            link.addEventListener("click", (evento) => {
-                evento.preventDefault();
-                abrir(quadro, i);
-            });
-        });
-    });
+        <div class="card"><div class="card-corpo">
+            <h3>Nome da pessoa ou instituição</h3>
+            <p>Papel no projeto.</p>
+        </div></div>
 
-    // Botões do visualizador
-    visualizador.querySelector(".vis-anterior").addEventListener("click", () => mostrar(atual - 1));
-    visualizador.querySelector(".vis-proxima").addEventListener("click", () => mostrar(atual + 1));
-    visualizador.querySelector(".vis-fechar").addEventListener("click", () => visualizador.close());
+        <div class="card"><div class="card-corpo">
+            <h3>Nome da pessoa ou instituição</h3>
+            <p>Papel no projeto.</p>
+        </div></div>
+    </div>
+</div></section>
 
-    // Setas do teclado (Esc já fecha sozinho)
-    visualizador.addEventListener("keydown", (evento) => {
-        if (fotos.length < 2) return;
-        if (evento.key === "ArrowRight") mostrar(atual + 1);
-        if (evento.key === "ArrowLeft") mostrar(atual - 1);
-    });
+</main>
 
-    // Clique fora da janela fecha
-    visualizador.addEventListener("click", (evento) => {
-        if (evento.target === visualizador) visualizador.close();
-    });
+<!-- Rodapé -->
+<footer><div class="container">
+    <p><strong>PANA Projetos</strong><br>Revitalização da Praça Américo Ferreira de Abreu</p>
+    <p>contato@seudominio.com.br<br>@seuperfil</p>
+</div></footer>
 
-    // Arrastar o dedo no celular
-    let toqueX = null;
+<!-- Visualizador de fotos (abre ao clicar em um quadro) -->
+<dialog id="visualizador" class="visualizador" aria-labelledby="vis-titulo">
+    <div class="vis-corpo">
+        <div class="vis-topo">
+            <h2 id="vis-titulo"></h2>
+            <button type="button" class="vis-fechar" aria-label="Fechar">&times;</button>
+        </div>
 
-    palco.addEventListener("touchstart", (evento) => {
-        toqueX = evento.changedTouches[0].clientX;
-    }, { passive: true });
+        <div class="vis-palco">
+            <button type="button" class="vis-seta vis-anterior" aria-label="Foto anterior">&#8249;</button>
+            <img class="vis-img" alt="">
+            <button type="button" class="vis-seta vis-proxima" aria-label="Próxima foto">&#8250;</button>
+        </div>
 
-    palco.addEventListener("touchend", (evento) => {
-        if (toqueX === null || fotos.length < 2) return;
+        <p class="vis-legenda" aria-live="polite"></p>
+        <p class="vis-contador"></p>
+        <div class="vis-tiras"></div>
+    </div>
+</dialog>
 
-        const diferenca = evento.changedTouches[0].clientX - toqueX;
-
-        if (Math.abs(diferenca) > 50) mostrar(atual + (diferenca < 0 ? 1 : -1));
-        toqueX = null;
-    });
-}
+<!-- Arquivos JavaScript -->
+<script src="../assets/js/script.js"></script>
+<script src="pg-plano.js"></script>
+</body>
+</html>
